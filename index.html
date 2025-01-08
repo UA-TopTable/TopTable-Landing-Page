@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TopTable - Restaurant Reservation Application</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .hero-section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background: url('https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/66732455-b249-4d7a-9251-7b6cd09fecf9/11789551-807c-4d64-b187-383079d3d20a.png') center/cover no-repeat;
+        }
+
+        /* Subtle overlay to increase text contrast */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        /* Content Section */
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            text-align: center;
+            color: #fff;
+            /* Fade-in animation */
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease-in-out;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: slideInUp 1s ease-in-out;
+        }
+
+        /* Portal Buttons */
+        .portal-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .portal-button {
+            background: #4caf50;
+            color: #fff;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 5px #366e3b;
+            animation: bounceIn 1s ease-in-out;
+        }
+
+        .portal-button:hover {
+            background: #3e8e41;
+            transform: translateY(-2px);
+        }
+
+        .portal-button:active {
+            background: #359138;
+            transform: translateY(2px);
+            box-shadow: 0 2px #366e3b;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            color: #333;
+            padding: 3rem 1rem;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .features h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: slideInLeft 1s ease-in-out;
+        }
+
+        .feature-columns {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .feature-columns {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .feature-column {
+            background: #f4f4f4;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            margin: 0 auto;
+            animation: zoomIn 1s ease-in-out;
+        }
+
+        .feature-column h3 {
+            color: #4caf50;
+            margin-bottom: 1rem;
+        }
+
+        .feature-column ul {
+            list-style: none;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        /* Fade-in animation keyframes */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide-in animations */
+        @keyframes slideInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Bounce-in animation */
+        @keyframes bounceIn {
+
+            0%,
+            20%,
+            40%,
+            60%,
+            80%,
+            100% {
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+
+            0% {
+                opacity: 0;
+                transform: scale3d(.3, .3, .3);
+            }
+
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+
+            40% {
+                transform: scale3d(.9, .9, .9);
+            }
+
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+
+            80% {
+                transform: scale3d(.97, .97, .97);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        /* Zoom-in animation */
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale3d(.3, .3, .3);
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+
+        /* ========== FEATURES SECTION STYLES ========== */
+        .features {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to bottom right, #fff, #f9f9f9);
+            color: #333;
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .features h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4CAF50;
+            /* Optional accent color */
+        }
+
+        .feature-columns {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .feature-columns {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .feature-column {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+            width: 300px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .15);
+        }
+
+        .feature-column h3 {
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-column ul {
+            list-style: none;
+            text-align: left;
+            line-height: 1.6;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .feature-column ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Custom bullet symbol */
+        .feature-column ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #2d2d2d;
+            color: #fff;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero-section">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>TopTable</h1>
+            <p>Your ultimate restaurant reservation solution. Enjoy quick browsing, easy table reservations, and
+                seamless management.</p>
+            <div class="portal-buttons">
+                <a href="/customer/ui/home" class="portal-button">Book a table now!</a>
+                <a href="/staff/ui/home" class="portal-button">Access to staff Portal</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Key Features</h2>
+        <div class="feature-columns">
+            <!-- Staff Features -->
+            <div class="feature-column">
+                <h3>Staff</h3>
+                <ul>
+                    <li>Create and manage restaurants</li>
+                    <li>Edit layouts, add images & descriptions</li>
+                    <li>Set working hours & manage coworkers</li>
+                    <li>Receive and confirm reservations</li>
+                    <li>Cancel or adjust bookings seamlessly</li>
+                </ul>
+            </div>
+            <!-- Customer Features -->
+            <div class="feature-column">
+                <h3>Customer</h3>
+                <ul>
+                    <li>Browse & filter restaurants</li>
+                    <li>Check real-time table availability</li>
+                    <li>Make quick reservations</li>
+                    <li>Receive instant booking confirmations</li>
+                    <li>Manage your bookings anytime</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 TopTable. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>
+</div>
